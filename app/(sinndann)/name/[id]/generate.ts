@@ -35,5 +35,5 @@ const fixed = (name: string, params: mytype.generateparams, i: number) => {
 	return num;
 };
 const random = (name: string, params: mytype.generateparams, i: number) => {
-	return randomInt(0, params.list[i].length);
+	return Math.floor(Math.random()*params.list[i].length)
 };
