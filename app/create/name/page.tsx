@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 const lists: Array<React.ReactNode> = [];
-export default function page() {
+export default function Page() {
 	const [bool, forcerender] = useState(false);
 	const list = (num: number) => <textarea className="list" id={`list_${num}`} />;
 
