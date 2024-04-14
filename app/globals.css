@@ -1,0 +1,51 @@
+body {
+	display: flex;
+	justify-content: center;
+	margin: 0;
+}
+
+#background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: -1;
+	background: linear-gradient(to bottom, rgb(200, 206, 202), rgb(234, 222, 185), rgb(226, 168, 114));
+}
+
+#vp {
+	margin:0 8px;
+	width: 100%;
+	max-width: 500px;
+	min-height: 97vh;
+	position: relative;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	display: flex;
+	width: 95%;
+	max-width: 500px;
+	justify-content: space-between;
+	background-color: #c8ceca;
+}
+
+main {
+
+	/*headerの高さ*/
+	margin-top: 30px;
+
+	/*footerの高さ*/
+	margin-bottom: 72px;
+
+	background-color: white;
+	border-radius: 10px;
+	padding: 10px 10px;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+}

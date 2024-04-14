@@ -6,7 +6,6 @@ export default function generate(name: string, type: mytype.generatetype, params
 	const nums = generatenums(name, type, params);
 	let ret = params.template.replaceAll('{name}',name)
 	for (const i in params.list) {
-        console.log(`{list_${(Number.parseInt(i)+1).toString()}}  =>  ${nums[i]}`)
 		ret = ret.replaceAll(`{list_${(Number.parseInt(i)+1).toString()}}`, nums[i]);
 	}
 	return ret;

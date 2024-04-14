@@ -9,8 +9,8 @@ export default function Page() {
 	}
 	const list = (num: number) => (
 		<div>
-			<h4>list_{num}</h4>
-			<textarea className="list" id={`list_${num}`} />
+			<h4>list_{num+1}</h4>
+			<textarea className="list" id={`list_${num+1}`} />
 		</div>
 	);
 
@@ -42,6 +42,7 @@ export default function Page() {
 			title: (document.getElementById("title") as HTMLInputElement).value,
 			type: (document.getElementById("type") as HTMLSelectElement).value,
 			template: (document.getElementById("template") as HTMLInputElement).value,
+			description:(document.getElementById('description') as HTMLInputElement).value,
 			random: Array.from(document.getElementsByClassName("list") as HTMLCollectionOf<HTMLInputElement>)
 				.map((elem) => elem.value)
 				.map((str) => {
@@ -83,8 +84,10 @@ export default function Page() {
 	return (
 		<>
 			<h2>名前診断</h2>
-			<h3>タイトル</h3>
+			<h3>タイトル(30文字以内推奨)</h3>
 			<input type="text" id="title" />
+			<h3>説明</h3>
+			<textarea id="description" />
 			<h3>更新頻度</h3>
 			<select id="type">
 				<option value="random">毎回変化</option>

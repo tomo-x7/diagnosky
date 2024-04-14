@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse } from "next/server";
 
 const supabase = createClient(process.env.SUPABASE_URL ?? "", process.env.SUPABASE_SERVICE_ROLE_KEY ?? "");
 export async function POST(rawreq: NextRequest) {
-	const req: { template: string; type: generatetype; random: string[][]; title: string } = await rawreq.json();
+	const req: { description:string,template: string; type: generatetype; random: string[][]; title: string } = await rawreq.json();
 	let iserror = false;
 	let error = "";
 	let id=0;
