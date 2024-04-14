@@ -3,13 +3,25 @@
 import { useState } from "react";
 const lists: Array<React.ReactNode> = [];
 export default function Page() {
-	const [bool, forcerender] = useState(false);
-	const list = (num: number) => <textarea className="list" id={`list_${num}`} />;
+	const [forcerend, setforcerend] = useState(false);
+	const forcerender=()=>{
+		setforcerend(forcerend ? false : true)
+	}
+	const list = (num: number) => (
+		<div>
+			<h4>list_{num}</h4>
+			<textarea className="list" id={`list_${num}`} />
+		</div>
+	);
 
 	const addlists = () => {
 		lists.push(list(lists.length));
-		forcerender(bool ? false : true);
+		forcerender();
 	};
+	const removelist=()=>{
+		lists.pop()
+		forcerender()
+	}
 	if (lists.length === 0) {
 		addlists();
 	}
@@ -56,14 +68,16 @@ export default function Page() {
 			window?.alert(iserror);
 			return;
 		}
-		fetch("/api/name", { method: "POST", body: JSON.stringify(body) }).then((data) => {
-			if (!data.ok) {
-				window?.alert(`${data.status}:${data.statusText}`);
-			}
-			return data.json()		
-			}).then((data)=>{
-				window?.alert('作成しました！\n作成したページにリダイレクトします')
-				location.href=`/name/${data.id}`
+		fetch("/api/name", { method: "POST", body: JSON.stringify(body) })
+			.then((data) => {
+				if (!data.ok) {
+					window?.alert(`${data.status}:${data.statusText}`);
+				}
+				return data.json();
+			})
+			.then((data) => {
+				window?.alert("作成しました！\n作成したページにリダイレクトします");
+				location.href = `/name/${data.id}`;
 			});
 	};
 	return (
@@ -94,8 +108,11 @@ export default function Page() {
 					<div key={key.toString()}>{value}</div>
 				))}
 			</div>
+			<button type="button" onClick={removelist}>
+				-
+			</button>
 			<button type="button" onClick={addlists}>
-				追加
+				+
 			</button>
 			<button type="button" onClick={send}>
 				作成
