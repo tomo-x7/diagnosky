@@ -12,7 +12,7 @@ const supabase = createClient(
 	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
 );
 
-export const revalidate=Infinity
+export const revalidate = Infinity
 
 export default async function Page({ params }: { params: { id: string } }) {
 	const DBdata: mytype.DBdata = await supabase
@@ -30,6 +30,16 @@ export default async function Page({ params }: { params: { id: string } }) {
 			<div className={style.description}>
 				<h2>{DBdata.title}</h2>
 				<div>{DBdata.description}</div>
+				<div>
+					<span>更新頻度：{() => {
+						switch (DBdata.type) {
+							case 'fixed':
+								return '固定'
+							case 'random':
+								return '毎回変化'
+						}
+					}}</span>
+				</div>
 			</div>
 			<div className={style.content}>
 				<Sinndann id={params.id} DBdata={DBdata} />
