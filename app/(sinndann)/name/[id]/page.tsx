@@ -13,6 +13,16 @@ const supabase = createClient(
 );
 
 export default function Page({ params }: { params: { id: string } }) {
+	const DBdata: mytype.DBdata = await supabase
+		.from("diagnosky_name")
+		.select()
+		.eq("id", params.id)
+		.then((data) => {
+			if (!data.data?.[0]) {
+				throw new Error(data.statusText);
+			}
+			return data.data[0];
+		});
 	return (
 		<>
 			<div className={style.description}>
@@ -20,7 +30,7 @@ export default function Page({ params }: { params: { id: string } }) {
 				<div>{DBdata.description}</div>
 			</div>
 			<div className={style.content}>
-			<Sinndann id={params.id} />
+				<Sinndann id={params.id} />
 			</div>
 		</>
 	);
