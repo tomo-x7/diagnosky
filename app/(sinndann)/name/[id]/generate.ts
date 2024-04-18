@@ -30,7 +30,7 @@ const generatenum = (type: mytype.generatetype) => {
 const fixed = (name: string, params: mytype.generateparams, i: number) => {
 	const hash = createHash("md5").update(name).update(params.id.toString()).update(i.toString()).digest("hex");
 	const num = Number.parseInt(hash, 16) % params.list[i].length;
-    console.log(`hash:${hash}\n${Number.parseInt(hash, 16)}\n${params.list[i].length}`)
+    console.log(`hash:${hash}\n${Number.parseInt(hash.substring(0,10), 16)}\n${params.list[i].length}`)
 	return num;
 };
 const random = (name: string, params: mytype.generateparams, i: number) => {
