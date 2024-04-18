@@ -67,7 +67,7 @@ export default function Sinndann({ id, DBdata }: { id: string, DBdata: mytype.DB
 								>
 									TOKIMEKIでシェア
 								</a>
-								<button type="button" onClick={setpages(1)}>戻る</button>
+								<button type="button" onClick={()=>{setpages(1)}}>戻る</button>
 							</>
 						);
 					}
