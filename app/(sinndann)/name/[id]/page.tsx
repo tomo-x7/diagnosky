@@ -15,7 +15,13 @@ const supabase = createClient(
 export default function Page({ params }: { params: { id: string } }) {
 	return (
 		<>
+			<div className={style.description}>
+				<h2>{DBdata.title}</h2>
+				<div>{DBdata.description}</div>
+			</div>
+			<div className={style.content}>
 			<Sinndann id={params.id} />
+			</div>
 		</>
 	);
 }

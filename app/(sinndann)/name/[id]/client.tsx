@@ -64,8 +64,6 @@ export default function Sinndann({ id }: { id: string }) {
 					case 1:
 						return (
 							<>
-								<h2>{DBdata.title}</h2>
-								<div>{DBdata.description}</div>
 								<input
 									type="text"
 									id="name"
