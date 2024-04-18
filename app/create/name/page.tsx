@@ -1,5 +1,5 @@
 "use client";
-
+export const dynamic = 'force-static'
 import { useState } from "react";
 const lists: Array<React.ReactNode> = [];
 export default function Page() {
