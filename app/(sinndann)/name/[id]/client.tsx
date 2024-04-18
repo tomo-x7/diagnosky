@@ -1,7 +1,7 @@
 "use client";
 
 import type * as mytype from "./mytype";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import generate from "./generate";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
@@ -9,7 +9,13 @@ export default function Sinndann({ id, DBdata }: { id: string, DBdata: mytype.DB
 	const [pages, setpages] = useState(1);
 	const [error, seterror] = useState("");
 	const [ans, setans] = useState("");
-	const defaultname = localStorage?.getItem("name") ?? ""
+	const [defaultname,setdefaultname]=useState('')
+	useEffect(()=>{
+		const _name=localStorage.getItem("name")
+		if(_name){
+			setdefaultname(_name)
+		}
+	},[])
 	const clickgenerate = () => {
 		const name = (document.getElementById("name") as HTMLInputElement).value;
 		localStorage?.setItem("name", name);
