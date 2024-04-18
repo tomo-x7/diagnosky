@@ -19,6 +19,7 @@ export default function Sinndann({ id, DBdata }: { id: string, DBdata: mytype.DB
 	const clickgenerate = () => {
 		const name = (document.getElementById("name") as HTMLInputElement).value;
 		localStorage?.setItem("name", name);
+		setdefaultname(name)
 		setans(
 			generate(name, DBdata.type, {
 				id: Number.parseInt(id),
