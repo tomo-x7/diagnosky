@@ -5,43 +5,10 @@ import { useState } from "react";
 import generate from "./generate";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-export default function Sinndann({ id }: { id: string }) {
-	const [pages, setpages] = useState(0);
-	const [DBdata, setDBdata] = useState<mytype.DBdata>({
-		id: 0,
-		template: "",
-		description: "",
-		type: "random",
-		random: [],
-		title: "",
-	});
+export default function Sinndann({ id,DBdata }: { id: string,DBdata:mytype.DBdata }) {
+	const [pages, setpages] = useState(1);
 	const [error, seterror] = useState("");
 	const [ans, setans] = useState("");
-	//loading
-	if (DBdata.title === "") {
-		const supabase = createClient(
-			process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
-			process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
-		);
-		supabase
-			.from("diagnosky_name")
-			.select()
-			.eq("id", id)
-			.then((data) => {
-				if (!/2../.test(data.status.toString())) {
-					seterror(`${data.status}:${data.statusText}`);
-					setpages(-1);
-					return;
-				}
-				if (!data.data?.[0]) {
-					seterror("404 not found");
-					setpages(-1);
-					return;
-				}
-				setDBdata(data.data[0]);
-				setpages(1);
-			});
-	}
 
 	const clickgenerate = () => {
 		const name = (document.getElementById("name") as HTMLInputElement).value;
@@ -59,8 +26,6 @@ export default function Sinndann({ id }: { id: string }) {
 		<>
 			{(() => {
 				switch (pages) {
-					case 0:
-						return <>loading</>;
 					case 1:
 						return (
 							<>

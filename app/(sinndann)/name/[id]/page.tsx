@@ -12,6 +12,8 @@ const supabase = createClient(
 	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
 );
 
+export const revalidate = 60;
+
 export default async function Page({ params }: { params: { id: string } }) {
 	const DBdata: mytype.DBdata = await supabase
 		.from("diagnosky_name")
@@ -30,7 +32,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 				<div>{DBdata.description}</div>
 			</div>
 			<div className={style.content}>
-				<Sinndann id={params.id} />
+				<Sinndann id={params.id} data={DBdata} />
 			</div>
 		</>
 	);
