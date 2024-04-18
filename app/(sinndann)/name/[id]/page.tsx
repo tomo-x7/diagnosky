@@ -31,14 +31,14 @@ export default async function Page({ params }: { params: { id: string } }) {
 				<h2>{DBdata.title}</h2>
 				<div>{DBdata.description}</div>
 				<div>
-					<span>更新頻度：{() => {
+					<span>更新頻度：{(() => {
 						switch (DBdata.type) {
 							case 'fixed':
 								return '固定'
 							case 'random':
 								return '毎回変化'
 						}
-					}}</span>
+					})()}</span>
 				</div>
 			</div>
 			<div className={style.content}>
