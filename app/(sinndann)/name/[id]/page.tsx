@@ -12,7 +12,7 @@ const supabase = createClient(
 	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
 );
 
-export default function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: { id: string } }) {
 	const DBdata: mytype.DBdata = await supabase
 		.from("diagnosky_name")
 		.select()
