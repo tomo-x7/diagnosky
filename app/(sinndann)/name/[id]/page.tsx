@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 				<div>{DBdata.description}</div>
 			</div>
 			<div className={style.content}>
-				<Sinndann id={params.id} data={DBdata} />
+				<Sinndann id={params.id} DBdata={DBdata} />
 			</div>
 		</>
 	);
