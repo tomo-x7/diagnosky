@@ -1,6 +1,11 @@
-.description{
+.description {
     height: 200px;
 }
-.content{
-    height: 100px;
+
+.content {
+    height: 300px;
+    border: green solid 10px;
+    position: relative;
+    left: -10px;
+    width: 480px;
 }
