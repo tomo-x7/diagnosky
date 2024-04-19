@@ -13,20 +13,27 @@ const supabase = createClient(
 );
 
 export async function generateStaticParams() {
-	return [{id:'1'}]
+	return [{ id: '1' }]
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
+	let is404 = false
 	const DBdata: mytype.DBdata = await supabase
 		.from("diagnosky_name")
 		.select()
 		.eq("id", params.id)
 		.then((data) => {
-			if (!data.data?.[0]) {
+			if (!data.data) {
 				throw new Error(data.statusText);
+			}
+			if (!data.data[0]) {
+				is404 = true
 			}
 			return data.data[0];
 		});
+	if (is404) {
+		return <><h1>404 not found</h1></>
+	}
 	return (
 		<>
 			<div className={style.description}>
@@ -51,16 +58,33 @@ export default async function Page({ params }: { params: { id: string } }) {
 }
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+	let is404=false
 	const DBdata: mytype.DBdata = await supabase
 		.from("diagnosky_name")
 		.select()
 		.eq("id", params.id)
 		.then((data) => {
-			if (!data.data?.[0]) {
+			if (!data.data) {
 				throw new Error(data.statusText);
+			}
+			if (!data.data[0]) {
+				is404 = true
 			}
 			return data.data[0];
 		});
+	if(is404){
+		return {
+			title: "notfound - diagnosky",
+			description: "お探しのページが見つかりませんでした。URLをお確かめください。",
+			openGraph: {
+				title: "notfound - diagnosky",
+				description: "お探しのページが見つかりませんでした。URLをお確かめください。",
+				siteName: "diagnosky",
+				locale: "ja-JP",
+				type: "website",
+			},
+		};
+	}
 
 	return {
 		title: `${DBdata.title} - diagnosky`,
