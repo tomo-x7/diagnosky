@@ -12,7 +12,9 @@ const supabase = createClient(
 	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
 );
 
-export const revalidate = Infinity
+export async function generateStaticParams() {
+	return [{id:'1'}]
+}
 
 export default async function Page({ params }: { params: { id: string } }) {
 	const DBdata: mytype.DBdata = await supabase
