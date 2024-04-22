@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import type { Viewport } from 'next'
+import type { Viewport } from 'next';
+import Image from 'next/image';
+import logo from './logo.png'
 
 export const viewport: Viewport = {
 	width: "500",
@@ -21,7 +23,12 @@ export default function RootLayout({
 				<div id="background" />
 				<div id="vp">
 					<header>
-						<a href="/">diagnosky</a>
+						<a href="/"><Image
+							src={logo.src}
+							width={100}
+							height={50}
+							alt="logo"
+						/></a>
 						<a href="/create">診断を作る</a>
 					</header>
 					<main>{children}</main>
