@@ -48,8 +48,9 @@ export default function Sinndann({ id, DBdata }: { id: string, DBdata: mytype.DB
 							</>
 						);
 					case 2: {
+						const brtxt=decodeURIComponent('%0A');
 						const encodesharetext = encodeURIComponent(
-							`${ans}\n\n#diagnosky #${DBdata.title}\nhttps://diagnosky.vercel.app/name/${id}`,
+							`${ans}${brtxt}#diagnosky #${DBdata.title}${brtxt}https://diagnosky.vercel.app/name/${id}`,
 						);
 						return (
 							<>
