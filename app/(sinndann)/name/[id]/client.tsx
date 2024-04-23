@@ -9,13 +9,13 @@ export default function Sinndann({ id, DBdata }: { id: string, DBdata: mytype.DB
 	const [pages, setpages] = useState(1);
 	const [error, seterror] = useState("");
 	const [ans, setans] = useState("");
-	const [defaultname,setdefaultname]=useState('')
-	useEffect(()=>{
-		const _name=localStorage.getItem("name")
-		if(_name){
+	const [defaultname, setdefaultname] = useState('')
+	useEffect(() => {
+		const _name = localStorage.getItem("name")
+		if (_name) {
 			setdefaultname(_name)
 		}
-	},[])
+	}, [])
 	const clickgenerate = () => {
 		const name = (document.getElementById("name") as HTMLInputElement).value;
 		localStorage?.setItem("name", name);
@@ -48,9 +48,10 @@ export default function Sinndann({ id, DBdata }: { id: string, DBdata: mytype.DB
 							</>
 						);
 					case 2: {
-						const brtxt=decodeURIComponent('%0A');
 						const encodesharetext = encodeURIComponent(
-							`${ans}${brtxt}#diagnosky #${DBdata.title}${brtxt}https://diagnosky.vercel.app/name/${id}`,
+							`${ans}
+							#diagnosky #${DBdata.title}
+							https://diagnosky.vercel.app/name/${id}`,
 						);
 						return (
 							<>
@@ -69,7 +70,7 @@ export default function Sinndann({ id, DBdata }: { id: string, DBdata: mytype.DB
 								>
 									TOKIMEKIでシェア
 								</a>
-								<button type="button" onClick={()=>{setpages(1)}}>戻る</button>
+								<button type="button" onClick={() => { setpages(1) }}>戻る</button>
 							</>
 						);
 					}
