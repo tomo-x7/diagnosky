@@ -11,15 +11,15 @@ body {
 	bottom: 0;
 	right: 0;
 	z-index: -1;
-	background: linear-gradient(to bottom, rgb(200, 206, 202), rgb(234, 222, 185), rgb(226, 168, 114));
+	background: linear-gradient(to bottom, #c8ceca, #eadeb9, #e2a872);
 }
 
 #vp {
-	margin:0 8px;
+	margin: 0 8px;
 	width: 100%;
 	max-width: 500px;
 	min-height: 97vh;
-	min-height:97dvh;
+	min-height: 97dvh;
 	position: relative;
 }
 
@@ -27,16 +27,17 @@ header {
 	position: fixed;
 	top: 0;
 	display: flex;
-	width: 95%;
+	width: 100vw;
 	max-width: 500px;
 	justify-content: space-between;
-	background-color: #c8ceca;
+	height: 40px;
+	padding: 1px 0px;
 }
 
 main {
 
 	/*headerの高さ*/
-	margin-top: 50px;
+	margin-top: 42px;
 
 	/*footerの高さ*/
 	margin-bottom: 72px;
