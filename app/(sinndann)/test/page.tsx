@@ -1,10 +1,11 @@
 import { Testcomponent } from './testcomponent'
-
+export const revalidate = 20;
 export default async function Page() {
 
 	return (
 		<>
-			<Testcomponent />
+			<div>{new Date().toString()}</div>
+			<div>component:<Testcomponent /></div>
 		</>
 	);
 }
