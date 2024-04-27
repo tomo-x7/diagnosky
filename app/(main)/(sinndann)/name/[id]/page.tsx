@@ -1,7 +1,7 @@
 //"use client";
 import { createClient } from "@supabase/supabase-js";
 import { useState } from "react";
-import type * as mytype from "./mytype";
+import type * as mytype from "../../../../mytype";
 import generate from "./generate";
 import style from "./style.module.css";
 import type { Metadata } from "next";

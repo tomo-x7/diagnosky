@@ -32,6 +32,7 @@ header {
 	justify-content: space-between;
 	height: 40px;
 	padding: 1px 0px;
+	z-index: 999;
 }
 
 main {

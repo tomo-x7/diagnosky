@@ -21,9 +21,12 @@ export function Header() {
 			style={
 				height !== 0
 					? { background: `linear-gradient(to bottom, #c8ceca 0%, #eadeb9, #e2a872 ${height}%)` }
-					: {}
+					: {backgroundColor:'#c8ceca'}
 			}
 		>
+			<script>
+
+			</script>
 			<a href="/">
 				<Image src={logo.src} width={91} height={40} alt="logo" />
 			</a>

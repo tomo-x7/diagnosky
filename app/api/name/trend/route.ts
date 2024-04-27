@@ -5,8 +5,8 @@ const redis = Redis.fromEnv();
 
 export async function POST(rawreq: NextRequest) {
 	const req = await rawreq.json();
-	const id = req.id;
-	const newc = redis.incr(`name_${id}`);
+	const key = `name_${req.id}`;
+	const newc = await redis.zincrby('trend',1,key)
 	return NextResponse.json({ count: newc })
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import type * as mytype from "./mytype";
+import type * as mytype from "../../../../mytype";
 import { useState, useEffect } from "react";
 import generate from "./generate";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
@@ -17,6 +17,7 @@ export default function Sinndann({ id, DBdata }: { id: string, DBdata: mytype.DB
 		}
 	}, [])
 	const clickgenerate = () => {
+		fetch('/api/name/trend',{method:'POST',body:JSON.stringify({id:id})})
 		const name = (document.getElementById("name") as HTMLInputElement).value;
 		localStorage?.setItem("name", name);
 		setdefaultname(name)

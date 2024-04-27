@@ -1,6 +1,6 @@
 // biome-ignore lint/style/useNodejsImportProtocol: <explanation>
 import { createHash, randomInt } from "crypto";
-import type * as mytype from "./mytype";
+import type * as mytype from "../../../../mytype";
 
 export default function generate(name: string, type: mytype.generatetype, params: mytype.generateparams) {
 	const nums = generatenums(name, type, params);

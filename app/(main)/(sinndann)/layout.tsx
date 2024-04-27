@@ -1,4 +1,5 @@
 import "./sinndann.css";
+import { Trend } from "../trend";
 
 export default function RootLayout({
 	children,
@@ -8,7 +9,7 @@ export default function RootLayout({
 	return (
 		<>
 			<div id="sinndann">{children}</div>
-			<div id="trend" />
+			<Trend />
 		</>
 	);
 }
