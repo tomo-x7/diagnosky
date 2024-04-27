@@ -40,5 +40,10 @@ export async function POST(req: NextRequest) {
 	await redis.zadd("trendbackup", { member: "nodata", score: -5 }, ...backupdata);
 	await redis.del("trend");
 
+	const latestlen = await redis.llen("latest");
+	if (latestlen > 21) {
+		await redis.rpop("latest", latestlen - 20);
+	}
+
 	return new NextResponse();
 }

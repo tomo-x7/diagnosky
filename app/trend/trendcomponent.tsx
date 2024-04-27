@@ -7,7 +7,7 @@ const supabase = createClient(
 	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
 );
 
-export async function TrendComponent({ id }: { id: string }) {
+export async function TrendComponent({ id, target }: { id: string; target: string | undefined }) {
 	const key = id.split("_");
 	const data: mytype.DBdata = await supabase
 		.from(`diagnosky_${key[0]}`)
@@ -22,12 +22,11 @@ export async function TrendComponent({ id }: { id: string }) {
 	return (
 		<>
 			<div className={style.wrapper}>
-				<a href={`/name/${data.id}`} target="_parent" className={style.link}>
-					<h4 className={style.title}>{data.title}</h4>
+				<a href={`/name/${data.id}`} target={target} className={style.link}>
+					<h3 className={style.title}>{data.title}</h3>
 					<p className={style.description}>{data.description}</p>
 				</a>
 			</div>
-			<hr className={style.hr} />
 		</>
 	);
 }
