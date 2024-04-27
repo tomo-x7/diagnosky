@@ -24,5 +24,7 @@ export async function POST(req: NextRequest) {
 		return new NextResponse(undefined,{status:403})
 	}
 	revalidatePath('/trend')
+	await new Promise((r) => setTimeout(r, 500));
+	await fetch('https://diagnosky.vercel.app/trend')
 	return new NextResponse();
 }
