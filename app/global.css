@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	p {
+		@apply my-3;
+	}
+	h1{
+		@apply font-bold text-3xl my-2;
+	}
+	h2{
+		@apply font-bold text-2xl my-2;
+	}
+	h3{
+		@apply font-bold text-xl my-1;
+	}
+	h4{
+		@apply font-bold text-base;
+	}
+	a{
+		@apply text-blue-800 underline;
+	}
+	button{
+		@apply bg-gray-300 text-sm px-1 py-[2px] border-black rounded-xl;
+	}
+}
+
+*{
+	font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans", "Noto Sans", Meiryo, sans-serif;
+}
+button{
+	border-width: 1px;
+}
+input,textarea,select{
+	border-style: inset;
+	border-color: black;
+	border-width: 1px;
+	border-radius: 5px;
+	resize: none;
+}
+input,textarea{
+	@apply px-1;
+}
+button,select,input,textarea{
+	@apply text-sm;
+}

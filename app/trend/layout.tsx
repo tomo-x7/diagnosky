@@ -9,7 +9,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ja">
+    <html lang="ja" style={{overflow:'hidden'}}>
       <body style={{margin:0,padding:0,display:'flex',flexDirection:'column',width:'480px',overflow:'hidden'}}>{children}</body>
     </html>
   )
