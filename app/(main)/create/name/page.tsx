@@ -1,16 +1,17 @@
 "use client";
 export const dynamic = 'force-static'
+import type { Metadata } from "next";
 import { useState } from "react";
 const lists: Array<React.ReactNode> = [];
 export default function Page() {
 	const [forcerend, setforcerend] = useState(false);
-	const forcerender=()=>{
-		setforcerend(forcerend ? false : true)
+	const forcerender = () => {
+		setforcerend(!forcerend)
 	}
 	const list = (num: number) => (
 		<div>
-			<h4>list_{num+1}</h4>
-			<textarea className="list" id={`list_${num+1}`} />
+			<h4>list_{num + 1}</h4>
+			<textarea className="list w-48" rows={8} id={`list_${num + 1}`} />
 		</div>
 	);
 
@@ -18,7 +19,7 @@ export default function Page() {
 		lists.push(list(lists.length));
 		forcerender();
 	};
-	const removelist=()=>{
+	const removelist = () => {
 		lists.pop()
 		forcerender()
 	}
@@ -42,7 +43,7 @@ export default function Page() {
 			title: (document.getElementById("title") as HTMLInputElement).value,
 			type: (document.getElementById("type") as HTMLSelectElement).value,
 			template: (document.getElementById("template") as HTMLInputElement).value,
-			description:(document.getElementById('description') as HTMLInputElement).value,
+			description: (document.getElementById('description') as HTMLInputElement).value,
 			random: Array.from(document.getElementsByClassName("list") as HTMLCollectionOf<HTMLInputElement>)
 				.map((elem) => elem.value)
 				.map((str) => {
@@ -85,9 +86,9 @@ export default function Page() {
 		<>
 			<h2>名前診断</h2>
 			<h3>タイトル(30文字以内推奨)</h3>
-			<input type="text" id="title" />
+			<input type="text" id="title" className="w-72" />
 			<h3>説明</h3>
-			<textarea id="description" />
+			<textarea id="description" className="w-72" rows={4} />
 			<h3>更新頻度</h3>
 			<select id="type">
 				<option value="random">毎回変化</option>
@@ -97,7 +98,7 @@ export default function Page() {
 			<div>
 				{"{name}"}で名前、{"{list_○}"}で生成された結果を埋め込めます
 			</div>
-			<textarea id="template" />
+			<textarea id="template" className="w-72" rows={3} />
 			<br />
 			<button type="button" id="addname" onClick={() => add("{name}", 6)}>
 				{"{name}を追加"}
@@ -117,9 +118,15 @@ export default function Page() {
 			<button type="button" onClick={addlists}>
 				+
 			</button>
-			<button type="button" onClick={send}>
-				作成
-			</button>
+			<br />
+			<div className="flex justify-center">
+				<button type="button" onClick={send} className="block bg-green text-white w-10/12 text-2xl h-12 rounded-full mt-6">
+					作成
+				</button>
+			</div>
 		</>
 	);
+}
+export const metadata:Metadata={
+	title:"名前診断を作成する"
 }
