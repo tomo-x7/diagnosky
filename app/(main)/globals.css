@@ -28,12 +28,13 @@ header {
 	position: fixed;
 	top: 0;
 	display: flex;
-	width: 100vw;
+	width: 98vw;
 	max-width: 500px;
 	justify-content: space-between;
-	height: 40px;
+	height: 44px;
 	padding: 1px 0px;
 	z-index: 999;
+	align-items: end;
 }
 
 main {

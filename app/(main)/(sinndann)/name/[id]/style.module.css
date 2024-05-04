@@ -3,8 +3,8 @@
 }
 
 .content {
-    height: 300px;
-    border: green solid 10px;
+    height: 200px;
+    border: #15007f solid 10px;
     position: relative;
     left: -10px;
     width: 500px;

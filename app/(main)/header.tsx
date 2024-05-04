@@ -21,16 +21,15 @@ export function Header() {
 			style={
 				height !== 0
 					? { background: `linear-gradient(to bottom, #c8ceca 0%, #eadeb9, #e2a872 ${height}%)` }
-					: {backgroundColor:'#c8ceca'}
+					: { backgroundColor: '#c8ceca' }
 			}
 		>
-			<script>
-
-			</script>
 			<a href="/">
-				<Image src={logo.src} width={91} height={40} alt="logo" />
+				<Image className="my-[2px]" src={logo.src} width={91} height={40} alt="logo" />
 			</a>
-			<a className={localstyle.create} href="/create">
+			<a href="/search/" className="">人気</a>
+			<a href="/search/latest/" className="">最新</a>
+			<a className={`${localstyle.create} shadow-lg hover:shadow-none`} href="/create">
 				診断を作る
 			</a>
 		</header>
