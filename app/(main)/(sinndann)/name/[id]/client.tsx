@@ -1,18 +1,23 @@
 "use client";
 
-import type * as mytype from "../../../../mytype";
+import type * as mytype from "@/app/mytype";
 import { useState, useEffect } from "react";
 import generate from "./generate";
-
+import Image from "next/image";
+import Bluesky from "@/app/static/Bluesky.svg";
+import skyshare from "@/app/static/skyshare.svg";
+import tokimeki from "@/app/static/tokimeki.png";
+import Twitter from "@/app/static/Twitter.svg";
+import style from './style.module.css'
 const settrendper = 1;
 export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DBdata }) {
 	const [pages, setpages] = useState(1);
 	const [error, seterror] = useState("");
 	const [ans, setans] = useState("");
 	const [defaultname, setdefaultname] = useState("");
-	if(typeof window==="object"){
+	if (typeof window === "object") {
 		const _name = localStorage.getItem("name");
-		if (_name&&defaultname!==_name) {
+		if (_name && defaultname !== _name) {
 			setdefaultname(_name);
 		}
 	}
@@ -20,8 +25,12 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 		if (Math.floor(Math.random() * settrendper) === 0) {
 			fetch("/api/name/trend", { method: "POST", body: JSON.stringify({ id: id }) });
 		}
-		const name = (document.getElementById("name") as HTMLInputElement).value;
-		localStorage?.setItem("name", name);
+		let name = (document.getElementById("name") as HTMLInputElement).value;
+		if (name === "") {
+			name = "名無しの権兵衛";
+		} else {
+			localStorage?.setItem("name", name);
+		}
 		setdefaultname(name);
 		setans(
 			generate(name, DBdata.type, {
@@ -45,6 +54,9 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 									placeholder="名前を入力"
 									defaultValue={defaultname}
 									className="h-12 text-2xl py-6 px-3 w-full"
+									onKeyDown={(e) => {
+										if (e.key === "Enter") clickgenerate();
+									}}
 								/>
 								<button
 									type="button"
@@ -61,46 +73,74 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 						);
 						const encodesharetext = encodeURIComponent(`${ans}#diagnosky #${DBdata.title}`);
 						const encodeshareurl = encodeURIComponent(`https://diagnosky.vercel.app/name/${id}`);
-						const copystring=`${ans}\n#diagnosky #${DBdata.title}\nhttps://diagnosky.vercel.app/name/${id}`
+						const copystring = `${ans}\n#diagnosky #${DBdata.title}\nhttps://diagnosky.vercel.app/name/${id}`;
+						const shareiconsize=32
 						return (
 							<div className="flex flex-col justify-around h-full">
 								<div>{ans}</div>
 								<div>
 									<div>結果をシェアする</div>
-									<div>
+									<div className={style.share}>
 										<a
 											href={`https://bsky.app/intent/compose?text=${encodesharestring}`}
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Bluesky
+											<Image
+												src={Bluesky.src}
+												width={shareiconsize-4}
+												height={shareiconsize-4}
+												alt="Bluesky"
+											/>
 										</a>
 										<a
 											href={`https://tokimeki.blue/shared?text=${encodesharestring}`}
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											TOKIMEKI
+											<Image
+												src={tokimeki.src}
+												width={shareiconsize}
+												height={shareiconsize}
+												alt="TOKIMEKI"
+											/>
 										</a>
 										<a
 											href={`https://skyshare.uk/app/?sharedText=${encodesharetext}&sharedUrl=${encodeshareurl}`}
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Skyshare
+											<Image
+												src={skyshare.src}
+												width={shareiconsize}
+												height={shareiconsize}
+												alt="Skyshare"
+											/>
 										</a>
 										<a
 											href={`https://twitter.com/intent/tweet?text=${encodesharestring}`}
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											Twitter
+											<Image
+												src={Twitter.src}
+												width={shareiconsize-8}
+												height={shareiconsize-8}
+												alt="Twitter"
+											/>
 										</a>
-										<button type="button" onClick={()=>{navigator.clipboard.writeText(copystring)}}>コピーする</button>
+										<button
+											type="button"
+											onClick={() => {
+												navigator.clipboard.writeText(copystring);
+											}}
+										>
+											コピーする
+										</button>
 									</div>
 								</div>
 								<button
-								className="w-fit bg-green text-white"
+									className="w-fit bg-green text-white"
 									type="button"
 									onClick={() => {
 										setpages(1);
