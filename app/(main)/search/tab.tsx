@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 
 export function Tab({ current }: { current: string }) {
+	return <></>
+	// biome-ignore lint/correctness/noUnreachable: <explanation>
 	const tab: Array<ReactNode> = [];
 	const list: Array<[name: string, URL: string]> = [
 		["人気", "/search"],
