@@ -8,7 +8,8 @@ const supabase = createClient(
 	process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
 	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
 );
-export const revalidate = 1200
+export const revalidate = 1200;
+export const dynamic = "force-static";
 export default async function Page() {
 	const data = await redis.lrange("latest", 0, 10);
 	return (
