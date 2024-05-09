@@ -4,10 +4,11 @@ import type * as mytype from "@/app/mytype";
 import { useState, useEffect } from "react";
 import generate from "./generate";
 import Image from "next/image";
-import Bluesky from "@/app/static/Bluesky.svg";
-import skyshare from "@/app/static/skyshare.svg";
+import Bluesky from "@/app/static/Bluesky.png";
+import skyshare from "@/app/static/skyshare.png";
 import tokimeki from "@/app/static/tokimeki.png";
-import Twitter from "@/app/static/Twitter.svg";
+import Twitter from "@/app/static/Twitter.png";
+import copy from '@/app/static/copy.svg'
 import style from './style.module.css'
 const settrendper = 1;
 export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DBdata }) {
@@ -80,7 +81,7 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 								<div>{ans}</div>
 								<div>
 									<div>結果をシェアする</div>
-									<div className={style.share}>
+									<div className={`${style.share} gap-2 `}>
 										<a
 											href={`https://bsky.app/intent/compose?text=${encodesharestring}`}
 											target="_blank"
@@ -88,8 +89,8 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 										>
 											<Image
 												src={Bluesky.src}
-												width={shareiconsize-4}
-												height={shareiconsize-4}
+												width={shareiconsize}
+												height={shareiconsize}
 												alt="Bluesky"
 											/>
 										</a>
@@ -124,18 +125,19 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 										>
 											<Image
 												src={Twitter.src}
-												width={shareiconsize-8}
-												height={shareiconsize-8}
+												width={shareiconsize}
+												height={shareiconsize}
 												alt="Twitter"
 											/>
 										</a>
 										<button
+											className="bg-white border-none p-0 rounded-none"
 											type="button"
 											onClick={() => {
 												navigator.clipboard.writeText(copystring);
 											}}
 										>
-											コピーする
+											<Image src={copy.src} width={shareiconsize} height={shareiconsize} alt="copy" />
 										</button>
 									</div>
 								</div>
