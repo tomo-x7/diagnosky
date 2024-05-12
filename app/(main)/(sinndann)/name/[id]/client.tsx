@@ -8,9 +8,12 @@ import Bluesky from "@/app/static/Bluesky.png";
 import skyshare from "@/app/static/skyshare.png";
 import tokimeki from "@/app/static/tokimeki.png";
 import Twitter from "@/app/static/Twitter.png";
-import copy from '@/app/static/copy.svg'
-import style from './style.module.css'
-const settrendper = 1;
+import copy from "@/app/static/copy.svg";
+import check from "@/app/static/check.png"
+import style from "./style.module.css";
+
+const settrendper = 1; // 1/nの確率でトレンドカウント
+
 export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DBdata }) {
 	const [pages, setpages] = useState(1);
 	const [error, seterror] = useState("");
@@ -42,123 +45,107 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 		);
 		setpages(2);
 	};
-	return (
-		<>
-			{(() => {
-				switch (pages) {
-					case 1:
-						return (
-							<div className="flex flex-col h-full justify-center items-center px-8 gap-4">
-								<input
-									type="text"
-									id="name"
-									placeholder="名前を入力"
-									defaultValue={defaultname}
-									className="h-12 text-2xl py-6 px-3 w-full"
-									onKeyDown={(e) => {
-										if (e.key === "Enter") clickgenerate();
-									}}
-								/>
-								<button
-									type="button"
-									onClick={clickgenerate}
-									className="bg-green text-white h-10 rounded-full text-3xl px-16 shadow-lg hover:shadow-none"
+	const [copysrc,setcopysrc]=useState(copy.src)
+	switch (pages) {
+		case 1:
+			return (
+				<div className="flex flex-col min-h-[165px] mt-[5px] justify-center items-center px-8 gap-4">
+					<input
+						type="text"
+						id="name"
+						placeholder="名前を入力"
+						defaultValue={defaultname}
+						className="h-12 text-2xl py-6 px-3 w-full"
+						onKeyDown={(e) => {
+							if (e.key === "Enter") clickgenerate();
+						}}
+					/>
+					<button
+						type="button"
+						onClick={clickgenerate}
+						className="bg-green text-white h-10 rounded-full text-3xl px-16 shadow-lg hover:shadow-none"
+					>
+						診断
+					</button>
+				</div>
+			);
+		case 2: {
+			const encodesharestring = encodeURIComponent(`${ans}\n#diagnosky #${DBdata.title}\nhttps://diagnosky.vercel.app/name/${id} `);
+			const encodesharetext = encodeURIComponent(`${ans}#diagnosky #${DBdata.title}`);
+			const encodeshareurl = encodeURIComponent(`https://diagnosky.vercel.app/name/${id}`);
+			const copystring = `${ans}\n#diagnosky #${DBdata.title}\nhttps://diagnosky.vercel.app/name/${id}`;
+			const shareiconsize = 32;
+			return (
+				<div className="flex flex-col justify-between h-full min-h-[170px]">
+					<div className="text-lg">{ans}</div>
+					<div>
+						<div>
+							<div>結果をシェアする</div>
+							<div className={`${style.share} gap-2 `}>
+								<a
+									title="Bluesky"
+									href={`https://bsky.app/intent/compose?text=${encodesharestring}`}
+									target="_blank"
+									rel="noopener noreferrer"
 								>
-									診断
-								</button>
-							</div>
-						);
-					case 2: {
-						const encodesharestring = encodeURIComponent(
-							`${ans}\n#diagnosky #${DBdata.title}\nhttps://diagnosky.vercel.app/name/${id}`,
-						);
-						const encodesharetext = encodeURIComponent(`${ans}#diagnosky #${DBdata.title}`);
-						const encodeshareurl = encodeURIComponent(`https://diagnosky.vercel.app/name/${id}`);
-						const copystring = `${ans}\n#diagnosky #${DBdata.title}\nhttps://diagnosky.vercel.app/name/${id}`;
-						const shareiconsize=32
-						return (
-							<div className="flex flex-col justify-around h-full">
-								<div>{ans}</div>
-								<div>
-									<div>結果をシェアする</div>
-									<div className={`${style.share} gap-2 `}>
-										<a
-											href={`https://bsky.app/intent/compose?text=${encodesharestring}`}
-											target="_blank"
-											rel="noopener noreferrer"
-										>
-											<Image
-												src={Bluesky.src}
-												width={shareiconsize}
-												height={shareiconsize}
-												alt="Bluesky"
-											/>
-										</a>
-										<a
-											href={`https://tokimeki.blue/shared?text=${encodesharestring}`}
-											target="_blank"
-											rel="noopener noreferrer"
-										>
-											<Image
-												src={tokimeki.src}
-												width={shareiconsize}
-												height={shareiconsize}
-												alt="TOKIMEKI"
-											/>
-										</a>
-										<a
-											href={`https://skyshare.uk/app/?sharedText=${encodesharetext}&sharedUrl=${encodeshareurl}`}
-											target="_blank"
-											rel="noopener noreferrer"
-										>
-											<Image
-												src={skyshare.src}
-												width={shareiconsize}
-												height={shareiconsize}
-												alt="Skyshare"
-											/>
-										</a>
-										<a
-											href={`https://twitter.com/intent/tweet?text=${encodesharestring}`}
-											target="_blank"
-											rel="noopener noreferrer"
-										>
-											<Image
-												src={Twitter.src}
-												width={shareiconsize}
-												height={shareiconsize}
-												alt="Twitter"
-											/>
-										</a>
-										<button
-											className="bg-white border-none p-0 rounded-none"
-											type="button"
-											onClick={() => {
-												navigator.clipboard.writeText(copystring);
-											}}
-										>
-											<Image src={copy.src} width={shareiconsize} height={shareiconsize} alt="copy" />
-										</button>
-									</div>
-								</div>
+									<Image src={Bluesky.src} width={shareiconsize} height={shareiconsize} alt="Bluesky" />
+								</a>
+								<a
+									title="TOKIMEKI"
+									href={`https://tokimeki.blue/shared?text=${encodesharestring}`}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<Image src={tokimeki.src} width={shareiconsize} height={shareiconsize} alt="TOKIMEKI" />
+								</a>
+								<a
+									title="Skyshare"
+									href={`https://skyshare.uk/app/?sharedText=${encodesharetext}&sharedUrl=${encodeshareurl}`}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<Image src={skyshare.src} width={shareiconsize} height={shareiconsize} alt="Skyshare" />
+								</a>
+								<a
+									title="Twitter"
+									href={`https://twitter.com/intent/tweet?text=${encodesharestring}`}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<Image src={Twitter.src} width={shareiconsize} height={shareiconsize} alt="Twitter" />
+								</a>
 								<button
-									className="w-fit bg-green text-white"
+									title="Copy"
+									className="bg-white border-none p-0 rounded-none"
 									type="button"
-									onClick={() => {
-										setpages(1);
+									onClick={async() => {
+										await navigator.clipboard.writeText(copystring);
+										setcopysrc(check.src)
+										setTimeout(() => {
+											setcopysrc(copy.src)
+										}, 1000);
 									}}
 								>
-									＜{"  "}戻る
+									<Image src={copysrc} width={shareiconsize} height={shareiconsize} alt="copy" />
 								</button>
 							</div>
-						);
-					}
-					case -1:
-						return <div>{error}</div>;
-					default:
-						break;
-				}
-			})()}
-		</>
-	);
+						</div>
+						<button
+							className="w-fit bg-green text-white pr-2"
+							type="button"
+							onClick={() => {
+								setpages(1);
+							}}
+						>
+							＜{"  "}戻る
+						</button>
+					</div>
+				</div>
+			);
+		}
+		case -1:
+			return <div>{error}</div>;
+		default:
+			return <>error</>
+	}
 }

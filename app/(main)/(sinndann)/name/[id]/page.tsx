@@ -50,7 +50,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 					})()}</span>
 				</div>
 			</div>
-			<div className={style.content}>
+			<div className={`${style.content} px-2 py-1`}>
 				<Sinndann id={params.id} DBdata={DBdata} />
 			</div>
 		</>

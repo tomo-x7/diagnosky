@@ -4,7 +4,7 @@
 
 .content {
     min-height: 200px;
-    height: 200px;
+    height: fit-content;
     border: #15007f solid 10px;
     position: relative;
     left: -10px;
