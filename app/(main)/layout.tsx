@@ -1,14 +1,24 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import type { Viewport } from 'next';
+import type { Viewport } from "next";
 import { Header } from "./header";
 
 export const viewport: Viewport = {
 	width: "500",
-}
+};
 export const metadata: Metadata = {
 	title: "diagnosky",
 	description: "Bluesky向けの診断メーカーです。",
+	openGraph: {
+		type: "website",
+		locale: "ja_JP",
+		siteName: "diagnosky",
+		title: "diagnosky",
+		description: "Bluesky向けの診断メーカーです。",
+		images: { url: "https://diagnosky.vercel.app/ogp.png" },
+	},
+	icons:{icon:"/favicon.ico"},
+	robots:{index:true,follow:true,}
 };
 
 export default function RootLayout({
