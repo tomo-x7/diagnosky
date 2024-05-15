@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 
 export function Header() {
 	const [height, setheight] = useState(0);
-	const [testwidth,settestwidth]=useState(0)
+	const [testwidth,settestwidth]=useState("0x0")
 	useEffect(() => {
 		setheight((document.documentElement.clientHeight / 40) * 100);
-		settestwidth(document.documentElement.clientWidth)
+		settestwidth(`${document.documentElement.clientWidth}x${document.documentElement.clientHeight}`)
 		const evf = () => {
 			setheight((document.documentElement.clientHeight / 40) * 100);
 		};
