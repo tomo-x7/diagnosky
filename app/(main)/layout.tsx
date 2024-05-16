@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import type { Viewport } from "next";
 import { Header } from "./header";
+import Head from "next/head";
 
 export const metadata: Metadata = {
 	title: "diagnosky",
@@ -25,7 +26,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="ja">
-			<head><meta name="viewport" content="width=500" /></head>
+			<Head><meta name="viewport" content="500" /></Head>
 			<body>
 				<div id="background" />
 				<div id="vp">
