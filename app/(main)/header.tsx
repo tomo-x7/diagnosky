@@ -23,7 +23,7 @@ export function Header() {
 		Array.from(document.getElementsByName("viewport")).map((elem) => {
 			elem.setAttribute("content", "width=500");
 		})};
-	}, []);
+	});
 	return (
 		<header
 			style={
