@@ -18,7 +18,7 @@ export function Header() {
 	}, []);
 	useEffect(() => {
 		const setviewport = () => {
-			if (window.screen.width < 550) {
+			if (window.innerWidth < 550) {
 				Array.from(document.getElementsByName("viewport")).map((elem) => {
 					elem.setAttribute("content", "width=500");
 				});
