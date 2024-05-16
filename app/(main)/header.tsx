@@ -19,7 +19,7 @@ export function Header() {
 		};
 	}, []);
 	useEffect(() => {
-		if(window.innerWidth<500){
+		if(window.innerWidth<550){
 		Array.from(document.getElementsByName("viewport")).map((elem) => {
 			elem.setAttribute("content", "width=500");
 		})};

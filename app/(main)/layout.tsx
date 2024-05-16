@@ -25,7 +25,7 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const script={__html:'if(window.innerWidth<500){Array.from(document.getElementsByName("viewport")).map((elem)=>{elem.setAttribute(\'content\',\'width=500\');})} '}
+	const script={__html:'if(window.innerWidth<550){Array.from(document.getElementsByName("viewport")).map((elem)=>{elem.setAttribute(\'content\',\'width=500\');})} '}
 	return (
 		<html lang="ja">
 			<head>
