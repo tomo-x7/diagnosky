@@ -18,6 +18,7 @@ export function Header() {
 			window.removeEventListener("resize", evf);
 		};
 	}, []);
+	useEffect(()=>{Array.from(document.getElementsByName("viewport")).map((elem)=>{elem.setAttribute('content','width=500');}) },[])
 	return (
 		<header
 			style={

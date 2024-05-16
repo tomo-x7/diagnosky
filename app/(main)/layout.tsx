@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Viewport } from "next";
 import { Header } from "./header";
 import Head from "next/head";
+import { useEffect } from "react";
 
 export const metadata: Metadata = {
 	title: "diagnosky",
@@ -15,8 +16,8 @@ export const metadata: Metadata = {
 		description: "Bluesky向けの診断メーカーです。",
 		images: { url: "https://diagnosky.vercel.app/ogp.png" },
 	},
-	icons:{icon:"/favicon.ico"},
-	robots:{index:true,follow:true,}
+	icons: { icon: "/favicon.ico" },
+	robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -24,10 +25,16 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const script={__html:'Array.from(document.getElementsByName("viewport")).map((elem)=>{elem.setAttribute(\'content\',\'width=500\');}) '}
 	return (
 		<html lang="ja">
-			<Head><meta name="viewport" content="500" /></Head>
+			<head>
+				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
+				<script dangerouslySetInnerHTML={script} />
+			</head>
 			<body>
+				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
+				<script dangerouslySetInnerHTML={script} />
 				<div id="background" />
 				<div id="vp">
 					<Header />
