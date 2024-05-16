@@ -6,10 +6,8 @@ import { useEffect, useState } from "react";
 
 export function Header() {
 	const [height, setheight] = useState(0);
-	const [testwidth, settestwidth] = useState("0x0");
 	useEffect(() => {
 		setheight((document.documentElement.clientHeight / 40) * 100);
-		settestwidth(`${document.documentElement.clientWidth}x${document.documentElement.clientHeight}`);
 		const evf = () => {
 			setheight((document.documentElement.clientHeight / 40) * 100);
 		};
@@ -50,7 +48,6 @@ export function Header() {
 			<a className={`${localstyle.create} shadow-lg hover:shadow-none`} href="/create">
 				診断を作る
 			</a>
-			<div style={{ position: "fixed", right: 0, bottom: 0 }}>{testwidth}</div>
 		</header>
 	);
 }
