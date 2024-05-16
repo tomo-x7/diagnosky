@@ -4,7 +4,7 @@ import type { Viewport } from "next";
 import { Header } from "./header";
 
 export const viewport: Viewport = {
-	width: "500",
+	width: "200",
 };
 export const metadata: Metadata = {
 	title: "diagnosky",
