@@ -3,9 +3,6 @@ import "./globals.css";
 import type { Viewport } from "next";
 import { Header } from "./header";
 
-export const viewport: Viewport = {
-	width: "200",
-};
 export const metadata: Metadata = {
 	title: "diagnosky",
 	description: "Bluesky向けの診断メーカーです。",
