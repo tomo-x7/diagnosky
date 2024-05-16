@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="ja">
-			<head><meta name="viewport" content="width=500"></head>
+			<head><meta name="viewport" content="width=500" /></head>
 			<body>
 				<div id="background" />
 				<div id="vp">
