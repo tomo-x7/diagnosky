@@ -9,6 +9,9 @@
     display: block;
 background-color: #00800033;
 }
+.wrapper.notfound:hover{
+    background: none;
+}
 .link{
     display: block;
     text-decoration: none;
