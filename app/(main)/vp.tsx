@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 
 export function VP({
 	children,
@@ -11,11 +11,13 @@ export function VP({
 	if (typeof document !== "undefined") {
 		vp = document.getElementById("vp");
 	}
-
+	const [testscale,settestscale]=useState(0)
 	const setwidth = () => {
 		if (typeof window !== "undefined") {
 			if (vp) {
-				vp.style.scale = (window.innerWidth > 500 ? 1 : Math.sqrt(window.innerWidth / 500)).toString();
+				const scale=(window.innerWidth > 500 ? 1 : Math.sqrt(window.innerWidth / 500)).toString()
+				vp.style.scale = scale;
+				settestscale(scale)
 			}
 		}
 	};
@@ -26,6 +28,7 @@ export function VP({
 	return (
 		<div id="vp" style={{ maxWidth: 500, width: "98vw",transformOrigin:"top center" }}>
 			{children}
+			<div style={{position:"fixed",bottom:0,right:0}}>scale:{testscale}</div>
 		</div>
 	);
 }
