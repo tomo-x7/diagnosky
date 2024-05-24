@@ -27,16 +27,22 @@ body {
 
 header {
 	position: fixed;
+	justify-self: center;
 	top: 0;
 	display: flex;
-	width: 100%;
-	max-width: 500px;
+	width: 500px;
 	justify-content: space-between;
 	height: 44px;
 	padding: 1px 0px;
 	z-index: 999;
 	align-items: end;
 	padding-right: 10px;
+}
+@media (max-width: 500px){
+	header{
+		width: 100vw;
+		justify-self: stretch;
+	}
 }
 
 main {
