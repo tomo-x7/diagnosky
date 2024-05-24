@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect,useState } from "react";
+import { useEffect } from "react";
 
 export function VP({
 	children,
@@ -31,7 +31,7 @@ export function VP({
 	return (
 		<div id="vp" style={{ maxWidth: 500, width: "98vw",transformOrigin:"top center" }}>
 			{children}
-			<div style={{position:"fixed",bottom:0,right:0}}>scale:{testscale}</div>
+			<div>scale:{testscale}</div>
 		</div>
 	);
 }
