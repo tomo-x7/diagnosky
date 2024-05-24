@@ -12,12 +12,14 @@ export function VP({
 		vp = document.getElementById("vp");
 	}
 	const [testscale, settestscale] = useState('0')
+	let width = 0
 	const setwidth = () => {
 		if (typeof window !== "undefined") {
 			if (vp) {
 				const scale = (window.innerWidth > 500 ? 1 : Math.sqrt(window.innerWidth / 500)).toString()
 				vp.style.scale = scale;
 				settestscale(scale)
+				width = window.innerWidth
 			}
 		}
 	};
@@ -28,7 +30,7 @@ export function VP({
 	return (
 		<div id="vp" style={{ maxWidth: 500, width: "98vw", transformOrigin: "top center" }}>
 			{children}
-			<div>scale:{testscale}</div>
+			<div>width:{width}scale:{testscale}</div>
 		</div>
 	);
 }
