@@ -8,8 +8,7 @@
     border: #15007f solid 10px;
     position: relative;
     left: -10px;
-    max-width: 500px;
-    width: 98vw;
+    width: 500px;
 }
 .share{
     display: flex;
