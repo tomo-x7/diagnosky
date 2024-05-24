@@ -11,16 +11,17 @@ export function VP({
 	if (typeof document !== "undefined") {
 		vp = document.getElementById("vp");
 	}
-	const [testscale,settestscale]=useState("0")
+	let testscale=0
 	const setwidth = () => {
 		if (typeof window !== "undefined") {
 			if (vp) {
 				const scale=(window.innerWidth > 500 ? 1 : Math.sqrt(window.innerWidth / 500)).toString()
 				vp.style.scale = scale;
-				settestscale(scale)
+				testscale=scale
 			}
 		}
 	};
+	const scale=(window?.innerWidth??500 > 500 ? 1 : Math.sqrt(window?.innerWidth??100 / 500)).toString()
 	useEffect(() => {
 		setwidth();
 		window.addEventListener("resize", setwidth);
