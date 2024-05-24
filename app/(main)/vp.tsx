@@ -11,7 +11,7 @@ export function VP({
 	if (typeof document !== "undefined") {
 		vp = document.getElementById("vp");
 	}
-	const [testscale,settestscale]=useState(0)
+	const [testscale,settestscale]=useState("0")
 	const setwidth = () => {
 		if (typeof window !== "undefined") {
 			if (vp) {
