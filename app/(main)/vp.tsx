@@ -21,7 +21,9 @@ export function VP({
 			}
 		}
 	};
-	const scale=(window?.innerWidth??500 > 500 ? 1 : Math.sqrt(window?.innerWidth??100 / 500)).toString()
+	if (typeof window !== "undefined") {
+	testscale=(window?.innerWidth??500 > 500 ? 1 : Math.sqrt(window?.innerWidth??100 / 500)).toString()
+	}
 	useEffect(() => {
 		setwidth();
 		window.addEventListener("resize", setwidth);
