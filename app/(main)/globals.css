@@ -1,9 +1,9 @@
-
 body {
 	display: flex;
-	justify-content: center;
 	margin: 0;
 	position: relative;
+	width: 100%;
+	justify-content: center;
 }
 
 #background {
@@ -17,50 +17,46 @@ body {
 }
 
 #vp {
-	margin: 0 8px;
-	width: 100%;
-	max-width: 500px;
+	padding: 0 8px;
+	width: 500px;
 	min-height: 97vh;
 	min-height: 97dvh;
 	position: relative;
 }
 
-header {
-	position: fixed;
-	justify-self: center;
-	top: 0;
-	display: flex;
-	width: 500px;
-	justify-content: space-between;
-	height: 44px;
-	padding: 1px 0px;
-	z-index: 999;
-	align-items: end;
-	padding-right: 10px;
-}
-@media (max-width: 500px){
-	header{
-		width: 100vw;
-		justify-self: stretch;
-	}
-}
-
-main {
-
-	/*headerの高さ*/
-	margin-top: 42px;
-
-	/*footerの高さ*/
-	margin-bottom: 72px;
-
-	background-color: white;
-	border-radius: 10px;
-	padding: 10px 10px;
-}
-
 footer {
 	position: absolute;
 	bottom: 0;
-	max-width: 500px;
-	width: 98vw;
+	width: 500px;
+}
+
+.create {
+	background-color: green;
+	border-radius: 9999px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	text-decoration: none;
+	padding: 7px 15px;
+	margin: 5px;
+	height: 32px;
+}
+
+
+@media (max-width: 500px) {
+	body{
+		justify-content: unset;
+	}
+	#vp {
+		width: 100%;
+	}
+	
+	header {
+		width: 100%;
+		justify-self: stretch;
+	}
+	footer {
+		width: 100%;
+	}
 }

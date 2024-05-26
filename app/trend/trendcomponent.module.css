@@ -1,37 +1,36 @@
-.wrapper{
+.wrapper {
     padding: 0px 10px;
-    border-top:1px solid black;
-    border-bottom:1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     margin-bottom: -1px;
 }
 
-.wrapper:hover{
+.wrapper:hover {
     display: block;
-background-color: #00800033;
+    background-color: #00800033;
 }
-.wrapper.notfound:hover{
+
+.wrapper.notfound:hover {
     background: none;
 }
-.link{
+
+.link {
     display: block;
     text-decoration: none;
     color: black;
 }
-.title{
+
+.title {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.description{
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-.hr{
+
+.hr {
     margin: 0;
     margin-block: 0;
     margin-inline: 0;
     border: none;
-    border-bottom:solid black 1px;
+    border-bottom: solid black 1px;
     height: 0;
 }

@@ -22,7 +22,7 @@ export async function TrendComponent({ id, target }: { id: string; target: strin
 			<>
 				<div className={`${style.wrapper} ${style.notfound}`}>
 					<h3 className={style.title}>見つかりません</h3>
-					<p className={style.description}>削除された可能性があります</p>
+					<p className="line-clamp-1 my-1.5 sp:my-1">削除された可能性があります</p>
 				</div>
 			</>
 		);
@@ -32,7 +32,7 @@ export async function TrendComponent({ id, target }: { id: string; target: strin
 			<div className={style.wrapper}>
 				<a href={`/name/${data.id}`} target={target} className={style.link}>
 					<h3 className={style.title}>{data.title}</h3>
-					<p className={style.description}>{data.description}</p>
+					<p className="line-clamp-2 my-1.5 sp:my-1">{data.description}</p>
 				</a>
 			</div>
 		</>

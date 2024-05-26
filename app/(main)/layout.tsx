@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import type { Viewport } from "next";
 import { Header } from "./header";
-import Head from "next/head";
-import { useEffect } from "react";
-import { VP } from "./vp";
 
 export const metadata: Metadata = {
 	title: "diagnosky",
@@ -30,11 +26,11 @@ export default function RootLayout({
 		<html lang="ja">
 			<body>
 				<div id="background" />
-				<VP>
+				<div id="vp" >
 					<Header />
-					<main>{children}</main>
-				</VP>
-				<footer>
+					<main className="w-full mt-[42px] mb-[72px] bg-white rounded-[10px] p-[10px] sp:mt-[30px]">{children}</main>
+				</div>
+				<footer className="sp:text-xs">
 					developed by{" "}
 					<a href="https://bsky.app/profile/did:plc:qcwvyds5tixmcwkwrg3hxgxd" target="_blank" rel="noopener noreferrer">
 						@tomo-x
