@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "./header";
+import { LoginButton } from "./loginbutton";
 
 export const metadata: Metadata = {
 	title: "diagnosky",
@@ -39,7 +40,8 @@ export default function RootLayout({
 					このプロジェクトはオープンソースです。
 					<a href="https://github.com/tomo-x7/diagnosky" target="_blank" rel="noopener noreferrer">
 						リポジトリ
-					</a>
+					</a><br />
+					<LoginButton />
 				</footer>
 			</body>
 		</html>
