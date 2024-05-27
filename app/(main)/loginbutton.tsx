@@ -6,7 +6,7 @@ export function LoginButton() {
     const [Login,setLogin]=useState(<></>)
     return (
         <>
-            <button onClick={setLogin(<Logincomp />)}>login</button>
+            <button onClick={()=>{setLogin(<Logincomp />)}}>login</button>
             {Login}
         </>
     )
