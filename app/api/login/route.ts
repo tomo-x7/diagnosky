@@ -14,17 +14,17 @@ export async function POST(rawreq: NextRequest) {
 
 	res.cookies.set('did', data.did, {
 		httpOnly: false,
-		Secure: true
+		secure: true
 	})
 	res.cookies.set('refreshJwt', data.refreshJwt, {
 		maxAge: 7770000,
 		httpOnly: true,
-		Secure: true
+		secure: true
 	})
 	res.cookies.set('accessJwt', data.accessJwt, {
 		maxAge: 7770000,
 		httpOnly: false,
-		Secure: true
+		secure: true
 	})
 	return res;
 }
