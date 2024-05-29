@@ -18,7 +18,7 @@ export function Header() {
 
 	return (
 		<header
-			className="fixed top-0 flex w-[484px] justify-between h-11 py-px z-50 items-end sp:w-[calc(100%-16px)] sp:h-[30px]"
+			className="fixed top-0 flex w-[484px] justify-between h-11 py-px z-30 items-end sp:w-[calc(100%-16px)] sp:h-[30px]"
 			style={
 				height !== 0
 					? { background: `linear-gradient(to bottom, #c8ceca 0%, #eadeb9, #e2a872 ${height}%)` }
@@ -35,9 +35,7 @@ export function Header() {
 				最新
 			</a>
 			<a
-				className={
-					"flex items-center justify-center h-[32px] text-white no-underline bg-green rounded-full px-[15px] py-[7px] m-[5px] shadow-lg hover:shadow-none sp:text-xs sp:px-[10px] sp:py-[4.6px] sp:h-[22px] sp:my-[3px]"
-				}
+				className="flex items-center justify-center h-[32px] text-white no-underline bg-green rounded-full px-[15px] py-[7px] m-[5px] shadow-lg hover:shadow-none sp:text-xs sp:px-[10px] sp:py-[4.6px] sp:h-[22px] sp:my-[3px]"
 				href="/create"
 			>
 				診断を作る
