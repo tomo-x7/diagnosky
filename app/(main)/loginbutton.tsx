@@ -1,13 +1,11 @@
 "use client";
 import { Logincomp } from "./login";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export function LoginButton() {
-	const [Login, setLogin] = useState(<div>aa</div>);
-	const [LoginButton, setLoginButton] = useState(<div />);
-	// biome-ignore lint/style/useConst: <explanation>
-	let rerend = 0;
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	const [Login, setLogin] = useState(<div />);
+	const [buttonAndAvatar,setbuttonAndAvatar]=useState<'Login'|URL>('Login')
 	useEffect(() => {
 		console.log("effect");
 		const cookies = document.cookie.split(";");
@@ -15,12 +13,15 @@ export function LoginButton() {
 		if (encodeddid) {
 			fetch(`https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=${encodeddid}`)
 				.then((res) => res.json())
-				.then((data) => data.avatar);
-
+				.then((data) => data.avatar)
+				.then((avatar) => {
+					const avatarURL = new URL(avatar)
+					setbuttonAndAvatar(avatarURL)
+				});
 		} else {
 		}
-	}, [rerend]);
-	return (
+	}, []);
+	return buttonAndAvatar==='Login' ? (
 		<>
 			<button
 				type="button"
@@ -33,5 +34,7 @@ export function LoginButton() {
 			</button>
 			{Login}
 		</>
+	) : (
+		<Image src={buttonAndAvatar.href} alt="usericon" width={32} height={32} className="rounded-full border border-black" />
 	);
 }
