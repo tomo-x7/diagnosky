@@ -2,7 +2,7 @@ export const dynamic = 'force-static'
 export default function Page() {
 	return (
 		<>
-        <h1><span style={{display:'inline-block'}}>オリジナル診断を</span><wbr /><span style={{display:'inline-block'}}>作成する</span></h1>
+        <h1 className="mini:text-xl">オリジナル診断を<wbr />作成する</h1>
 			<div id="name">
 				<h2>
 					<a href="/create/name">名前診断</a>

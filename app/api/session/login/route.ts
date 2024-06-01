@@ -2,10 +2,13 @@ import { type NextRequest, NextResponse } from "next/server";
 import { setcookies } from "../setcookie";
 
 export async function POST(rawreq: NextRequest) {
-	const req: { handle: string; password: string } = await rawreq.json();
+	const req: { handle: string; password: string,PDS:string } = await rawreq.json();
 	let iserror = false;
+	if(!(/https/.test(req.PDS))){
+
+	}
 	const data: { accessJwt: string; refreshJwt: string; did: string } = await fetch(
-		"https://bsky.social/xrpc/com.atproto.server.createSession",
+		`${req.PDS}/xrpc/com.atproto.server.createSession`,
 		{
 			method: "POST",
 			headers: { "Content-Type": "application/json" },

@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "add":"node sitemap_add.mjs"
+    "add": "node sitemap_add.mjs"
   },
   "dependencies": {
+    "@atproto/api": "^0.12.15",
     "@supabase/supabase-js": "^2.42.1",
     "@upstash/qstash": "^2.5.0",
     "@upstash/redis": "^1.29.0",

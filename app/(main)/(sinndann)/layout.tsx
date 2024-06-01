@@ -1,4 +1,3 @@
-import "./sinndann.css";
 import { Trend } from "../trend";
 
 export default function RootLayout({

@@ -14,6 +14,7 @@ module.exports = {
 		},
 		screens: {
 			sp: { max: "500px" },
+			mini:{max:"330px"}
 		},
 	},
 	plugins: [],

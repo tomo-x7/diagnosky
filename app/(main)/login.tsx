@@ -2,13 +2,18 @@
 
 import type { Dispatch, SetStateAction } from "react";
 
-export function Logincomp({ setlogincomp,rerend  }: { setlogincomp: Dispatch<SetStateAction<JSX.Element>>; rerend?: () => unknown }) {
+export function Logincomp({
+	setlogincomp,
+	changeLogin,
+}: { setlogincomp: Dispatch<SetStateAction<JSX.Element | undefined>>; changeLogin: () => void }) {
 	const login = async () => {
 		const handle = (document.getElementById("handle") as HTMLInputElement).value;
 		const password = (document.getElementById("password") as HTMLInputElement).value;
-		await fetch("/api/session/login", { method: "POST", body: JSON.stringify({ handle: handle, password: password }) });
-		//rerend();
-        //setlogincomp(<div />);
+		const PDS = (document.getElementById("selectPDS") as HTMLInputElement | undefined)?.value ?? "bsky.social";
+		localStorage.setItem('PDS',PDS)
+		await fetch("/api/session/login", { method: "POST", body: JSON.stringify({ handle: handle, password: password, PDS: PDS }) });
+		setlogincomp(undefined);
+		changeLogin();
 	};
 	return (
 		<>
@@ -16,14 +21,36 @@ export function Logincomp({ setlogincomp,rerend  }: { setlogincomp: Dispatch<Set
 				id="loginbackground"
 				className="flex justify-center items-center fixed top-0 right-0 bottom-0 left-0 z-40 bg-black bg-opacity-50 w-[100vw] h-[100vh]"
 			>
-				<div className="relative bg-white">
+				<div className="relative bg-white flex flex-col justify-start [&>*]:w-fit">
 					<h2>Login with Bluesky account</h2>
-					handle:
-					<input id="handle" type="text" />
-					<br />
-					App password:
-					<input id="password" type="password" />
-					<br />
+					<label>
+						<input
+							type="checkbox"
+							id="optionalPDS"
+							onChange={(ev) => {
+								const elem = document.getElementById("selectPDS");
+								if (!elem) return;
+								if (ev.target.checked) {
+									elem.style.display = "block";
+								} else {
+									elem.style.display = "none";
+								}
+							}}
+						/>
+						(オプション)PDSを選択する
+					</label>
+					<div id="selectPDS" style={{ display: "none" }}>
+						PDS:
+						<input type="text" defaultValue="bsky.social" />
+					</div>
+					<div>
+						ハンドル:
+						<input id="handle" type="text" />
+					</div>
+					<div>
+						App password:
+						<input id="password" type="password" />
+					</div>
 					<button type="button" onClick={login}>
 						Login
 					</button>
@@ -31,7 +58,7 @@ export function Logincomp({ setlogincomp,rerend  }: { setlogincomp: Dispatch<Set
 						type="button"
 						className="absolute top-0 right-0 bg-transparent text-gray-500 font-black border-none text-xl p-0"
 						onClick={() => {
-							setlogincomp(<div />);
+							setlogincomp(undefined);
 						}}
 					>
 						<svg

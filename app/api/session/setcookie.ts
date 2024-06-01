@@ -25,3 +25,8 @@ export function setcookies(res: NextResponse, { did, refreshJwt, accessJwt }: { 
 
 	return res;
 }
+export function deletecookies(res:NextResponse){
+	res.cookies.set("did","")
+	res.cookies.set("refreshJwt","")
+	res.cookies.set("accessJwt","")
+}

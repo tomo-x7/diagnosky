@@ -23,7 +23,8 @@ export function Trend() {
 				src="/trend"
 				scrolling="no"
 				title="trend"
-				style={{ margin: "0px", border: "none", width: "480px", overflow: "hidden", visibility: "hidden" }}
+				style={{ visibility: "hidden" }}
+				className="m-0 border-none w-full overflow-hidden "
 			/>
 		</>
 	);
