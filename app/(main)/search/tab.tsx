@@ -1,10 +1,11 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 export function Tab({ current }: { current: string }) {
 	return <></>
 	// biome-ignore lint/correctness/noUnreachable: <explanation>
 	const tab: Array<ReactNode> = [];
-	const list: Array<[name: string, URL: string]> = [
+	const list: Array<[name: string, URL: __next_route_internal_types__.RouteImpl<string>]> = [
 		["人気", "/search"],
 		["最新", "/search/latest"],
 	];
@@ -13,9 +14,9 @@ export function Tab({ current }: { current: string }) {
 			tab.push(<span key={index.toString()}>{value[0]}</span>);
 		} else {
 			tab.push(
-				<a href={value[1]} key={index.toString()}>
+				<Link href={value[1]} key={index.toString()}>
 					{value[0]}
-				</a>,
+				</Link>,
 			);
 		}
 	});

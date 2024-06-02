@@ -1,19 +1,37 @@
 "use client";
 
-import type { Dispatch, SetStateAction } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
+import { LoadSpin } from "./loadspin";
 
 export function Logincomp({
 	setlogincomp,
 	changeLogin,
 }: { setlogincomp: Dispatch<SetStateAction<JSX.Element | undefined>>; changeLogin: () => void }) {
+	const [LoginButton, setLoginButton] = useState<JSX.Element | string>("Login");
+	const [errormessage, seterrormessage] = useState<string | undefined>();
 	const login = async () => {
+		setLoginButton(<LoadSpin width={20} color="#000" />);
+		seterrormessage(undefined);
 		const handle = (document.getElementById("handle") as HTMLInputElement).value;
 		const password = (document.getElementById("password") as HTMLInputElement).value;
 		const PDS = (document.getElementById("selectPDS") as HTMLInputElement | undefined)?.value ?? "bsky.social";
-		localStorage.setItem('PDS',PDS)
-		await fetch("/api/session/login", { method: "POST", body: JSON.stringify({ handle: handle, password: password, PDS: PDS }) });
-		setlogincomp(undefined);
-		changeLogin();
+		localStorage.setItem("PDS", PDS);
+		await fetch("/api/session/login", { method: "POST", body: JSON.stringify({ handle: handle, password: password, PDS: PDS }) }).then(
+			async (res) => {
+				if (res.ok) {
+					setlogincomp(undefined);
+					changeLogin();
+				} else {
+					try {
+						const data = await res.json();
+						seterrormessage(data.message ?? data.error ?? `${res.status} : ${res.statusText}`);
+					} catch {
+						seterrormessage(`${res.status} : ${res.statusText}`);
+					}
+					setLoginButton('Login')
+				}
+			},
+		);
 	};
 	return (
 		<>
@@ -21,7 +39,7 @@ export function Logincomp({
 				id="loginbackground"
 				className="flex justify-center items-center fixed top-0 right-0 bottom-0 left-0 z-40 bg-black bg-opacity-50 w-[100vw] h-[100vh]"
 			>
-				<div className="relative bg-white flex flex-col justify-start [&>*]:w-fit">
+				<div className="relative bg-white flex flex-col justify-start [&>*]:w-fit [&_input]:border-solid invalid:[&_input]:border-red-600">
 					<h2>Login with Bluesky account</h2>
 					<label>
 						<input
@@ -41,18 +59,32 @@ export function Logincomp({
 					</label>
 					<div id="selectPDS" style={{ display: "none" }}>
 						PDS:
-						<input type="text" defaultValue="bsky.social" />
+						<input
+							className="border-solid invalid:border-red-600"
+							required
+							type="text"
+							defaultValue="bsky.social"
+							placeholder="bsky.social"
+							pattern="^([a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$"
+						/>
 					</div>
 					<div>
 						ハンドル:
-						<input id="handle" type="text" />
+						<input
+							id="handle"
+							type="text"
+							placeholder="example.bsky.social"
+							pattern="^([a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$"
+							required
+						/>
 					</div>
 					<div>
 						App password:
-						<input id="password" type="password" />
+						<input id="password" type="password" required />
 					</div>
+					<div>{errormessage}</div>
 					<button type="button" onClick={login}>
-						Login
+						{LoginButton}
 					</button>
 					<button
 						type="button"

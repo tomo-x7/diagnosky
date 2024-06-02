@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import type * as mytype from "../mytype";
 import style from "./trendcomponent.module.css";
+import Link from "next/link";
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL ?? "", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "");
 
@@ -30,10 +31,10 @@ export async function TrendComponent({ id, target }: { id: string; target: strin
 	return (
 		<>
 			<div className={style.wrapper}>
-				<a href={`/name/${data.id}`} target={target} className={style.link}>
+				<Link href={`/name/${data.id}`} target={target} className={style.link}>
 					<h3 className={style.title}>{data.title}</h3>
 					<p className="line-clamp-2 my-1.5 sp:my-1">{data.description}</p>
-				</a>
+				</Link>
 			</div>
 		</>
 	);

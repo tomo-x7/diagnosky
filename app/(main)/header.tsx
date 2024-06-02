@@ -3,6 +3,7 @@ import logo from "./logo.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { LoginButton } from "./loginbutton";
+import Link from "next/link";
 
 export function Header() {
 	const [height, setheight] = useState(0);
@@ -27,21 +28,21 @@ export function Header() {
 			}
 		>
 			<div className="flex justify-between grow items-end">
-				<a href="/">
+				<Link href="/">
 					<Image className="my-[2px] sp:h-[26px] sp:w-[60px]" src={logo.src} width={91} height={40} alt="logo" />
-				</a>
-				<a href="/search/" className="sp:text-xs">
+				</Link>
+				<Link href="/search" className="sp:text-xs">
 					人気
-				</a>
-				<a href="/search/latest/" className="sp:text-xs">
+				</Link>
+				<Link href="/search/latest" className="sp:text-xs">
 					最新
-				</a>
-				<a
+				</Link>
+				<Link
 					className="flex items-center justify-center h-[32px] text-white no-underline bg-green rounded-full px-[15px] py-[7px] m-[5px] shadow-lg hover:shadow-none sp:text-xs sp:px-[10px] sp:py-[4.6px] sp:h-[22px] sp:my-[3px]"
 					href="/create"
 				>
 					診断を作る
-				</a>
+				</Link>
 			</div>
 			<LoginButton />
 		</header>

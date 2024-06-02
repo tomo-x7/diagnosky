@@ -4,11 +4,11 @@ import { setcookies } from "../setcookie";
 export async function POST(rawreq: NextRequest) {
 	const req: { handle: string; password: string,PDS:string } = await rawreq.json();
 	let iserror = false;
-	if(!(/https/.test(req.PDS))){
-
+	if(!(/^([a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(req.PDS))){
+		return NextResponse.json({error:'wrong PDS'},{status:400})
 	}
 	const data: { accessJwt: string; refreshJwt: string; did: string } = await fetch(
-		`${req.PDS}/xrpc/com.atproto.server.createSession`,
+		`https://${req.PDS}/xrpc/com.atproto.server.createSession`,
 		{
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -27,7 +27,7 @@ export async function POST(rawreq: NextRequest) {
 			return data;
 		});
 		if(iserror){
-			return new NextResponse(null,{status:400})
+			return NextResponse.json({error:'ハンドルまたはパスワードが間違っています'},{status:400})
 		}
 	const res = new NextResponse();
 
