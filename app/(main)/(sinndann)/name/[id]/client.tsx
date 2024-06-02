@@ -11,6 +11,7 @@ import Twitter from "@/app/static/Twitter.png";
 import copy from "@/app/static/copy.svg";
 import check from "@/app/static/check.png"
 import style from "./style.module.css";
+import { AutoPostButton } from "@/app/(main)/autopostbutton";
 
 const settrendper = 1; // 1/nの確率でトレンドカウント
 
@@ -80,6 +81,7 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 					<div className="text-lg">{ans}</div>
 					<div>
 						<div>
+							<AutoPostButton />
 							<div>結果をシェアする</div>
 							<div className={`${style.share} gap-2 `}>
 								<a
