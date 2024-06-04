@@ -140,28 +140,9 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 									className="bg-white border-none p-0 rounded-none"
 									type="button"
 									onClick={async () => {
-										seterror('')
-										const sharebody: ShareData = { text: sharetext };
-										const file = await fetch(`https://diagnosky.vercel.app/api/OGP/?title=${DBdata.title}`)
-											.then((res) => {
-												if (!res.ok) {
-													throw new Error(`${res.status} : ${res.statusText}`);
-												}
-												return res.blob();
-											})
-											.then((blob) => new File([blob], "image.png", { type: "image/png" }))
-											.catch((e) => {
-												console.log(e);
-												seterror('画像の取得に失敗しました。テキストのみでシェアします。')
-											});
-										if (file && navigator.canShare({ files: [file] })) {
-											sharebody.files = [file];
-											navigator.share(sharebody);
-										} else {
-											sharebody.url = shareurl;
-											navigator.share(sharebody);
-											seterror('画像の共有に失敗しました。テキストのみでシェアします')
-										}
+										seterror("");
+										const sharebody: ShareData = { text: sharetext, url: shareurl };
+										await navigator.share(sharebody);
 									}}
 								>
 									<Image src={share.src} width={shareiconsize} height={shareiconsize} alt="share" />
@@ -172,7 +153,7 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 							className="w-fit bg-green text-white pr-2"
 							type="button"
 							onClick={() => {
-								seterror('')
+								seterror("");
 								setpages(1);
 							}}
 						>
