@@ -4,14 +4,17 @@ import type * as mytype from "@/app/mytype";
 import { useState, useEffect } from "react";
 import generate from "./generate";
 import Image from "next/image";
+import style from "./style.module.css";
+import { AutoPostButton } from "@/app/(main)/autopostbutton";
+import type { StaticImport } from "next/dist/shared/lib/get-img-props";
+
 import Bluesky from "@/app/static/Bluesky.png";
 import skyshare from "@/app/static/skyshare.png";
 import tokimeki from "@/app/static/tokimeki.png";
 import Twitter from "@/app/static/Twitter.png";
 import copy from "@/app/static/copy.svg";
-import check from "@/app/static/check.png"
-import style from "./style.module.css";
-import { AutoPostButton } from "@/app/(main)/autopostbutton";
+import check from "@/app/static/check.png";
+import share from "@/app/static/share.png";
 
 const settrendper = 1; // 1/nの確率でトレンドカウント
 
@@ -46,7 +49,7 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 		);
 		setpages(2);
 	};
-	const [copysrc,setcopysrc]=useState(copy.src)
+	const [copysrc, setcopysrc] = useState<string | StaticImport>(copy.src);
 	switch (pages) {
 		case 1:
 			return (
@@ -71,10 +74,12 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 				</div>
 			);
 		case 2: {
-			const encodesharestring = encodeURIComponent(`${ans}\n#diagnosky #${DBdata.title}\nhttps://diagnosky.vercel.app/name/${id} `);
-			const encodesharetext = encodeURIComponent(`${ans}#diagnosky #${DBdata.title}`);
-			const encodeshareurl = encodeURIComponent(`https://diagnosky.vercel.app/name/${id}`);
-			const copystring = `${ans}\n#diagnosky #${DBdata.title}\nhttps://diagnosky.vercel.app/name/${id}`;
+			const sharestring = `${ans}\n#diagnosky #${DBdata.title}\nhttps://diagnosky.vercel.app/name/${id}`;
+			const sharetext = `${ans}#diagnosky #${DBdata.title}`;
+			const shareurl = `https://diagnosky.vercel.app/name/${id}`;
+			const encodesharestring = encodeURIComponent(sharestring);
+			const encodesharetext = encodeURIComponent(sharetext);
+			const encodeshareurl = encodeURIComponent(shareurl);
 			const shareiconsize = 32;
 			return (
 				<div className="flex flex-col justify-between h-full min-h-[170px]">
@@ -120,15 +125,46 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 									title="Copy"
 									className="bg-white border-none p-0 rounded-none"
 									type="button"
-									onClick={async() => {
-										await navigator.clipboard.writeText(copystring);
-										setcopysrc(check.src)
+									onClick={async () => {
+										await navigator.clipboard.writeText(sharestring);
+										setcopysrc(check.src);
 										setTimeout(() => {
-											setcopysrc(copy.src)
+											setcopysrc(copy.src);
 										}, 1000);
 									}}
 								>
 									<Image src={copysrc} width={shareiconsize} height={shareiconsize} alt="copy" />
+								</button>
+								<button
+									title="Share"
+									className="bg-white border-none p-0 rounded-none"
+									type="button"
+									onClick={async () => {
+										seterror('')
+										const sharebody: ShareData = { text: sharetext };
+										const file = await fetch(`https://diagnosky.vercel.app/api/OGP/?title=${DBdata.title}`)
+											.then((res) => {
+												if (!res.ok) {
+													throw new Error(`${res.status} : ${res.statusText}`);
+												}
+												return res.blob();
+											})
+											.then((blob) => new File([blob], "image.png", { type: "image/png" }))
+											.catch((e) => {
+												console.log(e);
+												seterror('画像の取得に失敗しました。テキストのみでシェアします。')
+											});
+										if (file && navigator.canShare({ files: [file] })) {
+											sharebody.files = [file];
+											navigator.share(sharebody);
+										} else {
+											sharebody.url = shareurl;
+											navigator.share(sharebody);
+											seterror('画像の共有に失敗しました。テキストのみでシェアします')
+										}
+									}}
+								>
+									<Image src={share.src} width={shareiconsize} height={shareiconsize} alt="share" />
 								</button>
 							</div>
 						</div>
@@ -136,18 +172,20 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 							className="w-fit bg-green text-white pr-2"
 							type="button"
 							onClick={() => {
+								seterror('')
 								setpages(1);
 							}}
 						>
 							＜{"  "}戻る
 						</button>
 					</div>
+					<span className="text-red-600">{error}</span>
 				</div>
 			);
 		}
 		case -1:
 			return <div>{error}</div>;
 		default:
-			return <>error</>
+			return <>error</>;
 	}
 }
