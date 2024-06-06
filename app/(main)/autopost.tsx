@@ -1,8 +1,35 @@
 "use client";
 
-import type { Dispatch, SetStateAction } from "react";
+import { BskyAgent, RichText } from "@atproto/api";
+import { useState } from "react";
+import { LoadSpin } from "./loadspin";
 
-export function AutoPost({close}:{close:()=>void}) {
+export function AutoPost({ close, sharetext }: { close: () => void; sharetext: string }) {
+	const [ButtonText,setButtonText]=useState<'投稿する'|JSX.Element>('投稿する')
+	const [error,seterror]=useState<string|undefined>(undefined)
+	const post = async () => {
+		setButtonText(<LoadSpin width={16} color="#000000" />)
+		const service = `https://${localStorage.getItem("PDS") ?? "bsky.social"}`;
+		const cookies = document.cookie.split(";");
+		const encodeddid = cookies.find((value) => /did=/.test(value))?.split("=")[1];
+		let encodedaccessJwt = cookies.find((value) => /accessJwt=/.test(value))?.split("=")[1];
+		if (!encodedaccessJwt) {
+			await fetch("/api/session/refresh");
+			encodedaccessJwt = cookies.find((value) => /accessJwt=/.test(value))?.split("=")[1];
+		}
+		const text = new RichText({ text: "テスト #テスト\n@tomo-x.bsky.social https://example.com" });
+		const agent = new BskyAgent({ service: service });
+		await text.detectFacets(agent);
+		// await fetch(`${service}/xrpc/com.atproto.repo.createRecord`, {
+		// 	body: JSON.stringify({
+		// 		collection: "app.bsky.feed.post",
+		// 		repo: decodeURIComponent(encodeddid ?? ""),
+		// 		record: { text: text.text, facets: text.facets, createdAt: new Date().toISOString(), $type: "app.bsky.feed.post" },
+		// 	}),
+		// 	method: "POST",
+		// 	headers:{Authorization: `Bearer ${decodeURIComponent(encodedaccessJwt??"")}`,"Content-Type":"application/json"}
+		// });
+	};
 	return (
 		<>
 			<div
@@ -11,11 +38,16 @@ export function AutoPost({close}:{close:()=>void}) {
 			>
 				<div className="relative bg-white flex flex-col justify-start [&>*]:w-fit [&_input]:border-solid invalid:[&_input]:border-red-600">
 					<h2>Blueskyに投稿する</h2>
+					<textarea id="comment" placeholder="追加したいコメントはここへ" maxLength={300 - sharetext.length} />
+					<div className="text-red-600">{error}</div>
+					<button type="button" onClick={post}>
+						{ButtonText}
+					</button>
 					<button
 						type="button"
 						className="absolute top-0 right-0 bg-transparent text-gray-500 font-black border-none text-xl p-0"
 						onClick={() => {
-							close()
+							close();
 						}}
 					>
 						<svg

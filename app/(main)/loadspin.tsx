@@ -1,4 +1,4 @@
-export function LoadSpin({ width, color }: { width: number; color: string }) {
+export function LoadSpin({ width, color }: { width: number; color:string }) {
 	return (
 		<div
 			style={{ width: width, height: width, borderColor: color, borderTopColor:'transparent' }}

@@ -5,15 +5,15 @@ import Bluesky from "@/app/static/Bluesky.png";
 import { useState } from "react";
 import { Logincomp } from "./login";
 
-export function AutoPostButton() {
+export function AutoPostButton({sharetext}:{sharetext:string}) {
 	const [autopostelem, setautopostelem] = useState<JSX.Element>();
 	const autoPostClick = () => {
 		const cookies = document.cookie.split(";");
 		const encodeddid = cookies.find((value) => /did=/.test(value))?.split("=")[1];
 		if(encodeddid){
-			setautopostelem(<AutoPost close={()=>{setautopostelem(undefined)}}/>)
+			setautopostelem(<AutoPost sharetext={sharetext} close={()=>{setautopostelem(undefined)}}/>)
 		}else{
-			setautopostelem(<Logincomp setlogincomp={setautopostelem} changeLogin={()=>{setautopostelem(<AutoPost close={()=>{setautopostelem(undefined)}} />)}} />)
+			setautopostelem(<Logincomp setlogincomp={setautopostelem} changeLogin={()=>{setautopostelem(<AutoPost sharetext={sharetext} close={()=>{setautopostelem(undefined)}} />)}} />)
 		}
 	};
 

@@ -86,7 +86,7 @@ export default function Sinndann({ id, DBdata }: { id: string; DBdata: mytype.DB
 					<div className="text-lg">{ans}</div>
 					<div>
 						<div>
-							<AutoPostButton />
+							<AutoPostButton sharetext={sharetext} />
 							<div>結果をシェアする</div>
 							<div className={`${style.share} gap-2 `}>
 								<a
