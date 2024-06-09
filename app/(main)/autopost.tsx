@@ -29,6 +29,7 @@ export function AutoPost({ close, sharetext }: { close: () => void; sharetext: s
 		// 	method: "POST",
 		// 	headers:{Authorization: `Bearer ${decodeURIComponent(encodedaccessJwt??"")}`,"Content-Type":"application/json"}
 		// });
+		close()
 	};
 	return (
 		<>
